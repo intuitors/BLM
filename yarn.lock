@@ -3720,6 +3720,14 @@ ignite-ir-boilerplate@^2.2.2:
   dependencies:
     ramda "^0.23.0"
 
+ignite-maps@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/ignite-maps/-/ignite-maps-0.1.6.tgz#f449c52cee5fb0f3ecce7d603b5904354cf8503b"
+
+ignite-tab-view@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ignite-tab-view/-/ignite-tab-view-0.0.1.tgz#cadc59f71c3974787d7a72d723d5b23f445bb709"
+
 image-size@^0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.1.tgz#98122a562d59dcc097ef1b2c8191866eb8f5d663"
@@ -6080,6 +6088,10 @@ react-native-drawer@^2.3.0:
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.1.tgz#950dbdaca66f458689a7e9697c5beb9bd53f98f2"
+
+react-native-maps@0.16.4:
+  version "0.16.4"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.16.4.tgz#c18c3cab8cd0ce05431cd74dac11a39afaa579e4"
 
 react-native-tab-view@^0.0.70:
   version "0.0.70"
