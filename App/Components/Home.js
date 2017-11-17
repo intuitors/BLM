@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import MapView from 'react-native-maps'
 import HomeCallout from './HomeCallout'
 import Styles from './Styles/HomeStyles'
-
+import { calculateRegion } from '../Lib/MapHelpers'
 // Generate this MapHelpers file with `ignite generate map-utilities`
 // You must have Ramda as a dev dependency to use this.
 // import { calculateRegion } from '../Lib/MapHelpers'
@@ -23,7 +23,7 @@ class Home extends React.Component {
   * For full documentation, see https://github.com/lelandrichardson/react-native-maps
   *************************************************************/
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     /* ***********************************************************
     * STEP 1
@@ -41,8 +41,8 @@ class Home extends React.Component {
     * You can generate a handy `calculateRegion` function with
     * `ignite generate map-utilities`
     *************************************************************/
-    // const region = calculateRegion(locations, { latPadding: 0.05, longPadding: 0.05 })
-    const region = { latitude: 123, longitude: 123, latitudeDelta: 0.1, longitudeDelta: 0.1}
+    const region = calculateRegion(locations, { latPadding: 0.005, longPadding: 0.005 })
+    // const region = { latitude: 123, longitude: 123, latitudeDelta: 0.1, longitudeDelta: 0.1}
     this.state = {
       region,
       locations,
@@ -50,9 +50,15 @@ class Home extends React.Component {
     }
     this.renderMapMarkers = this.renderMapMarkers.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        region: { latitude: position.coords.latitude, longitude: position.coords.longitude, latitudeDelta: 0.005, longitudeDelta: 0.005 }
+      })
+    });
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     /* ***********************************************************
     * STEP 3
     * If you wish to recenter the map on new locations any time the
@@ -63,7 +69,7 @@ class Home extends React.Component {
     // })
   }
 
-  onRegionChange (newRegion) {
+  onRegionChange(newRegion) {
     /* ***********************************************************
     * STEP 4
     * If you wish to fetch new locations when the user changes the
@@ -78,17 +84,17 @@ class Home extends React.Component {
     // Fetch new data...
   }
 
-  calloutPress (location) {
+  calloutPress(location) {
     /* ***********************************************************
     * STEP 5
     * Configure what will happen (if anything) when the user
     * presses your callout.
     *************************************************************/
-    
+
     // console.tron.log(location) // Reactotron
   }
 
-  renderMapMarkers (location) {
+  renderMapMarkers(location) {
     /* ***********************************************************
     * STEP 6
     * Customize the appearance and location of the map marker.
@@ -96,13 +102,13 @@ class Home extends React.Component {
     *************************************************************/
 
     return (
-      <MapView.Marker key={location.title} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+      <MapView.Marker key={location.title} coordinate={{ latitude: location.latitude, longitude: location.longitude }}>
         <HomeCallout location={location} onPress={this.calloutPress} />
       </MapView.Marker>
     )
   }
 
-  render () {
+  render() {
     return (
       <MapView
         style={Styles.map}
