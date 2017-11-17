@@ -1,4 +1,5 @@
 import { StackNavigator } from 'react-navigation'
+import FooterList from '../Containers/FooterList'
 import NotificationScreen from '../Containers/NotificationScreen'
 import ProfileScreen from '../Containers/ProfileScreen'
 import ActivityScreen from '../Containers/ActivityScreen'
@@ -11,6 +12,7 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
+  FooterList: { screen: FooterList },
   Home: { screen: Home },
   NotificationScreen: { screen: NotificationScreen },
   ProfileScreen: { screen: ProfileScreen },

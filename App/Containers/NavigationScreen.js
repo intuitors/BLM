@@ -16,7 +16,7 @@ import styles from './Styles/NavigationScreenStyle'
 class NavigationScreen extends Component {
 
   state = {
-    index: 0,
+    index: 2,
     routes: [
       { key: '1', icon: 'handshake-o' },
       { key: '2', icon: 'bars' },
@@ -30,6 +30,15 @@ class NavigationScreen extends Component {
     this.setState({
       index,
     });
+  };
+
+  _initialLayout = ({ route }) => {
+    return (
+      <Home
+        state={this.state}
+      // style={{ backgroundColor: '#4caf50' }}
+      />
+    );
   };
 
   _renderIndicator = props => {
@@ -80,14 +89,14 @@ class NavigationScreen extends Component {
         return (
           <ProfessionalScreen
             state={this.state}
-            style={{ backgroundColor: '#ff4081' }}
+            // style={{ backgroundColor: '#ff4081' }}
           />
         );
       case '2':
         return (
           <ActivityScreen
             state={this.state}
-            style={{ backgroundColor: '#673ab7' }}
+            // style={{ backgroundColor: '#673ab7' }}
           />
         );
       case '3':
@@ -101,18 +110,23 @@ class NavigationScreen extends Component {
         return (
           <ProfileScreen
             state={this.state}
-            style={{ backgroundColor: '#673ab7' }}
+            // style={{ backgroundColor: '#673ab7' }}
           />
         );
       case '5':
         return (
           <NotificationScreen
             state={this.state}
-            style={{ backgroundColor: '#4caf50' }}
+            // style={{ backgroundColor: '#4caf50' }}
           />
         );
       default:
-        return null;
+        return (
+          <Home
+            state={this.state}
+          // style={{ backgroundColor: '#4caf50' }}
+          />
+        );
     }
   };
 

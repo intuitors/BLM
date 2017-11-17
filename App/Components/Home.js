@@ -4,6 +4,7 @@ import MapView from 'react-native-maps'
 import HomeCallout from './HomeCallout'
 import Styles from './Styles/HomeStyles'
 import { calculateRegion } from '../Lib/MapHelpers'
+import FooterList from '../Containers/FooterList'
 // Generate this MapHelpers file with `ignite generate map-utilities`
 // You must have Ramda as a dev dependency to use this.
 // import { calculateRegion } from '../Lib/MapHelpers'
@@ -31,8 +32,7 @@ class Home extends React.Component {
     * a latitude and longitude as well as any additional information you wish to display.
     *************************************************************/
     const locations = [
-      { title: 'Location A', latitude: 37.78825, longitude: -122.4324 },
-      { title: 'Location B', latitude: 37.75825, longitude: -122.4624 }
+      // { title: 'Auxenta', latitude: 6.933765, longitude: 79.843003 },
     ]
     /* ***********************************************************
     * STEP 2
@@ -110,14 +110,17 @@ class Home extends React.Component {
 
   render() {
     return (
-      <MapView
-        style={Styles.map}
-        initialRegion={this.state.region}
-        onRegionChangeComplete={this.onRegionChange}
-        showsUserLocation={this.state.showUserLocation}
-      >
-        {this.state.locations.map((location) => this.renderMapMarkers(location))}
-      </MapView>
+      <View style={Styles.container}>
+        <MapView
+          style={Styles.map}
+          initialRegion={this.state.region}
+          onRegionChangeComplete={this.onRegionChange}
+          showsUserLocation={this.state.showUserLocation}
+        >
+          {this.state.locations.map((location) => this.renderMapMarkers(location))}
+        </MapView>
+        <FooterList />
+      </View>
     )
   }
 }
