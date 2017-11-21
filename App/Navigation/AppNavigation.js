@@ -1,4 +1,6 @@
 import { StackNavigator } from 'react-navigation'
+import SearchPlaces from '../Containers/SearchPlaces'
+import HomeSearchScreen from '../Containers/HomeSearchScreen'
 import FooterList from '../Containers/FooterList'
 import NotificationScreen from '../Containers/NotificationScreen'
 import ProfileScreen from '../Containers/ProfileScreen'
@@ -12,6 +14,8 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
+  SearchPlaces: { screen: SearchPlaces },
+  HomeSearchScreen: { screen: HomeSearchScreen },
   FooterList: { screen: FooterList },
   Home: { screen: Home },
   NotificationScreen: { screen: NotificationScreen },

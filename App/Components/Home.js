@@ -5,6 +5,7 @@ import HomeCallout from './HomeCallout'
 import Styles from './Styles/HomeStyles'
 import { calculateRegion } from '../Lib/MapHelpers'
 import FooterList from '../Containers/FooterList'
+import HomeSearch from '../Components/HomeSearch'
 // Generate this MapHelpers file with `ignite generate map-utilities`
 // You must have Ramda as a dev dependency to use this.
 // import { calculateRegion } from '../Lib/MapHelpers'
@@ -119,6 +120,7 @@ class Home extends React.Component {
         >
           {this.state.locations.map((location) => this.renderMapMarkers(location))}
         </MapView>
+        <HomeSearch />
         <FooterList />
       </View>
     )
