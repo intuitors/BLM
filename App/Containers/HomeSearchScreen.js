@@ -3,6 +3,7 @@ import { TouchableOpacity, View, ScrollView, Image, Text, KeyboardAvoidingView, 
 import { connect } from 'react-redux'
 import { Images } from '../Themes'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import RNGooglePlaces from 'react-native-google-places'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 import SearchPlaces from '../Containers/SearchPlaces'
@@ -10,6 +11,23 @@ import SearchPlaces from '../Containers/SearchPlaces'
 import styles from './Styles/HomeSearchScreenStyle'
 
 class HomeSearchScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      googlePlaces: ''
+    }
+  }
+
+  searchGooglePlaces(text) {
+    RNGooglePlaces.getAutocompletePredictions(text, {
+      country: 'LK',
+    }).then((place) => {
+      this.setState({
+        googlePlaces: place
+      })
+    }).catch(error => console.log(error.message))
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -21,18 +39,12 @@ class HomeSearchScreen extends Component {
             <TextInput style={styles.inputSearch}
               placeholder='Set location on map'
               underlineColorAndroid='transparent'
-              tintColor={"white"} />
+              onChangeText={text => this.searchGooglePlaces(text)} />
           </TouchableOpacity>
         </KeyboardAvoidingView>
-        <SearchPlaces/>
+        <SearchPlaces places={this.state.googlePlaces} />
       </View>
-
-      // <ScrollView style={styles.container}>
-      //   <KeyboardAvoidingView behavior='position'>
-      //     <Text>HomeSearchScreen</Text>
-      //   </KeyboardAvoidingView>
-      // </ScrollView>
-    )
+    );
   }
 }
 

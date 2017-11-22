@@ -11,26 +11,33 @@ import styles from './Styles/SearchPlacesStyle'
 class SearchPlaces extends React.PureComponent {
   constructor(props){
     super(props);
+    this.state = {
+      googlePlaces: props.places
+    }
   }
+
+  componentWillReceiveProps(props){
+    console.log("SearchResults props 1", props.places);
+    this.setState({
+      googlePlaces: props.places
+    })
+    console.log("SearchResults props 2", this.state.googlePlaces);
+  }
+
   /* ***********************************************************
   * STEP 1
   * This is an array of objects with the properties you desire
   * Usually this should come from Redux mapStateToProps
   *************************************************************/
-  state = {
-    dataObjects: [
-      {title: 'First Title', description: 'First Description'},
-      {title: 'Second Title', description: 'Second Description'},
-      {title: 'Third Title', description: 'Third Description'},
-      {title: 'Fourth Title', description: 'Fourth Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'}
-    ]
-  }
+  // state = {
+  //   dataObjects: [
+  //     {title: 'First Title', description: 'First Description'},
+  //     {title: 'Second Title', description: 'Second Description'},
+  //     {title: 'Third Title', description: 'Third Description'},
+  //     {title: 'Fourth Title', description: 'Fourth Description'},
+  //     {title: 'Fifth Title', description: 'Fifth Description'}
+  //   ]
+  // }
 
   /* ***********************************************************
   * STEP 2
@@ -47,8 +54,8 @@ class SearchPlaces extends React.PureComponent {
           <Icon name='map-marker' style={styles.leftIcon} />
         </View>
       <View style={styles.row}>
-        <Text style={styles.primaryText}>{item.title}</Text>
-        <Text style={styles.secondaryText}>{item.description}</Text>
+        <Text style={styles.primaryText}>{item.primaryText}</Text>
+        <Text style={styles.secondaryText}>{item.secondaryText}</Text>
       </View>
       </TouchableOpacity>
     )
@@ -65,7 +72,7 @@ class SearchPlaces extends React.PureComponent {
 
   // Render a footer?
   renderFooter = () =>
-    <Text style={[styles.label, styles.sectionHeader]}> Set location on map </Text>
+    // <Text style={[styles.label, styles.sectionHeader]}> Set location on map </Text>
 
   // Show this when data is empty
   renderEmpty = () =>
@@ -101,7 +108,7 @@ class SearchPlaces extends React.PureComponent {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={styles.listContent}
-          data={this.state.dataObjects}
+          data={this.state.googlePlaces}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}
