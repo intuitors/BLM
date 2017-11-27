@@ -9,19 +9,26 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './Styles/SearchPlacesStyle'
 
 class SearchPlaces extends React.PureComponent {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      googlePlaces: props.places
+      googlePlaces: props.places,
+      selectedPlace: props.selectedPlace
     }
+    this.renderRow = this.renderRow.bind(this);
   }
 
-  componentWillReceiveProps(props){
-    console.log("SearchResults props 1", props.places);
+  componentWillReceiveProps(props) {
     this.setState({
       googlePlaces: props.places
     })
-    console.log("SearchResults props 2", this.state.googlePlaces);
+  }
+
+  onPressItem = (rowItem) => {
+    this.props.screenProps.setSelectedPlace(rowItem);
+    this.setState({
+      selectedPlace: rowItem
+    });
   }
 
   /* ***********************************************************
@@ -47,16 +54,16 @@ class SearchPlaces extends React.PureComponent {
   * e.g.
     return <MyCustomCell title={item.title} description={item.description} />
   *************************************************************/
-  renderRow ({item}) {
+  renderRow({ item }) {
     return (
-      <TouchableOpacity style={styles.row}>
-      <View>
-          <Icon name='map-marker' style={styles.leftIcon} />
+      <TouchableOpacity
+        style={styles.elementContainer}
+        onPress={() => this.onPressItem(item)}>
+        <Icon name='map-marker' style={styles.leftIcon} />
+        <View >
+          <Text style={styles.primaryText}>{item.primaryText}</Text>
+          <Text style={styles.secondaryText}>{item.secondaryText}</Text>
         </View>
-      <View style={styles.row}>
-        <Text style={styles.primaryText}>{item.primaryText}</Text>
-        <Text style={styles.secondaryText}>{item.secondaryText}</Text>
-      </View>
       </TouchableOpacity>
     )
   }
@@ -68,23 +75,29 @@ class SearchPlaces extends React.PureComponent {
   *************************************************************/
   // Render a header?
   renderHeader = () =>
-    // <Text style={[styles.label, styles.sectionHeader]}> - Header - </Text>
+    <TouchableOpacity style={styles.elementContainer}>
+      <Icon name='home' style={styles.leftIcon} />
+      <Text style={styles.primaryText}> Home </Text>
+    </TouchableOpacity>
 
   // Render a footer?
   renderFooter = () =>
-    // <Text style={[styles.label, styles.sectionHeader]}> Set location on map </Text>
+    <TouchableOpacity style={styles.elementContainer}>
+      <Icon name='location-arrow' style={styles.leftIcon} />
+      <Text style={styles.primaryText}> Set location on map </Text>
+    </TouchableOpacity>
 
   // Show this when data is empty
   renderEmpty = () =>
     // <Text style={styles.label}> - Nothing to See Here - </Text>
 
-  renderSeparator = () =>
-    // <Text style={styles.label}> - ~~~~~ - </Text>
+    renderSeparator = () =>
+      // <Text style={styles.label}> - ~~~~~ - </Text>
 
-  // The default function if no Key is provided is index
-  // an identifiable key is important if you plan on
-  // item reordering.  Otherwise index is fine
-  keyExtractor = (item, index) => index
+      // The default function if no Key is provided is index
+      // an identifiable key is important if you plan on
+      // item reordering.  Otherwise index is fine
+      keyExtractor = (item, index) => index
 
   // How many items should be kept im memory as we scroll?
   oneScreensWorth = 20
@@ -103,7 +116,7 @@ class SearchPlaces extends React.PureComponent {
   //   {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
   // )}
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <FlatList

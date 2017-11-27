@@ -46,4 +46,12 @@ export default StyleSheet.create({
     fontStyle: 'italic',
     color: Colors.charcoal
   },
+  elementContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginVertical: Metrics.baseMargin,
+    marginLeft: Metrics.baseMargin,
+    marginRight: Metrics.baseMargin,
+  }
 })

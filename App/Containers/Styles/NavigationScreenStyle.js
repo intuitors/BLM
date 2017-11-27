@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   icon: {
     backgroundColor: 'transparent',
-    color: '#0084ff',
+    color: Colors.charcoal,
     padding: Metrics.doubleBaseMargin,
   },
   indicator: {

@@ -14,8 +14,10 @@ class HomeSearchScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      googlePlaces: ''
+      googlePlaces: '',
+      selectedPlace: ''
     }
+    this.setSelectedPlace = this.setSelectedPlace.bind(this);
   }
 
   searchGooglePlaces(text) {
@@ -26,6 +28,17 @@ class HomeSearchScreen extends Component {
         googlePlaces: place
       })
     }).catch(error => console.log(error.message))
+  }
+
+  setSelectedPlace(place) {
+    // console.log("Param ", place);
+    this.setState({
+      selectedPlace: place,
+    }, () => { this.props.screenProps.toggle })
+
+    // console.log("State ", this.state.selectedPlace)
+    // this.props.selectedPlace = { place }
+    // console.log("Props ", this.props.selectedPlace)
   }
 
   render() {
@@ -42,7 +55,7 @@ class HomeSearchScreen extends Component {
               onChangeText={text => this.searchGooglePlaces(text)} />
           </TouchableOpacity>
         </KeyboardAvoidingView>
-        <SearchPlaces places={this.state.googlePlaces} />
+        <SearchPlaces screenProps={{ setSelectedPlace: this.setSelectedPlace }} places={this.state.googlePlaces} />
       </View>
     );
   }

@@ -56,7 +56,7 @@ class NavigationScreen extends Component {
   };
 
   _renderIcon = ({ route }) => {
-    return <Icon name={route.icon} size={24} style={styles.icon} onIndexChange />;
+    return <Icon name={route.icon} size={24} style={styles.icon} />;
   };
 
   _renderBadge = ({ route }) => {

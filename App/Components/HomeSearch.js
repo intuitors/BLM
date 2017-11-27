@@ -26,7 +26,9 @@ export default class HomeSearch extends Component {
   }
 
   _toggleModal = () => {
-    this.setState({ showModal: !this.state.showModal })
+    this.setState({
+      showModal: !this.state.showModal
+    })
   }
 
   render() {
